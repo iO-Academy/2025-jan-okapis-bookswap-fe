@@ -3,7 +3,7 @@ import Highlighted from "./atoms/Highlighted"
 
 export default function SingleBook({title, author, image, genre}) {
     return (
-        <div className="m-2 p-4 border-2">
+        <div className="m-2 p-4 border-2 flex flex-col items-center gap-2">
             <img src={image} alt="" />
             <H2 text={title} />
             <Highlighted text={author} />

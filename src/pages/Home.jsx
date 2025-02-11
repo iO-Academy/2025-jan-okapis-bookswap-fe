@@ -9,9 +9,8 @@ export default function Home() {
 
         fetch(url)
          .then(res => res.json())
-         .then(fetchedInfo=> {
+         .then(fetchedInfo => {
             setBookInfo(fetchedInfo.data)
-            console.log(fetchedInfo.data)
          })
     }
 
