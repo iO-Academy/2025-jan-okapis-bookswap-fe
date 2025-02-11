@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import SingleBook from "../components/SingleBook";
 
-export default function Home () {
- //setting the constants for the fetched info and creating state
+export default function Home() {
     const [bookInfo, setBookInfo] = useState([])
 
-    function getData(){
+    function getData() {
         let url = "https://book-swap-api.dev.io-academy.uk/api/books"
 
         fetch(url)
@@ -14,13 +13,21 @@ export default function Home () {
             setBookInfo(fetchedInfo.data)
             console.log(fetchedInfo.data)
          })
-     }
+    }
 
     useEffect(getData, [])
 
-    return (
-      <section> 
-        {/* <SingleBook title= author= image= genre= /> */}
+    return(
+      <section>    
+        {bookInfo.map(function (book) {
+            return <SingleBook
+                key={book.id}
+                title={book.title}
+                author={book.author}
+                image={book.image}
+                genre={book.genre.name}
+             />   
+        })}
       </section> 
     )
 }
