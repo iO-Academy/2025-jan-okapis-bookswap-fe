@@ -1,8 +1,7 @@
 import H2 from "../components/atoms/H2"
 import Highlighted from "./atoms/Highlighted"
 
-export default function SingleBook({title, author, image, genre}){
-
+export default function SingleBook({title, author, image, genre}) {
     return (
         <div className="m-2 p-4 border-2">
             <img src={image} alt="" />
@@ -12,4 +11,3 @@ export default function SingleBook({title, author, image, genre}){
         </div>
     )
 }
-
