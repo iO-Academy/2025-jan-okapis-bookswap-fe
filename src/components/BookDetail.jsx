@@ -6,7 +6,7 @@ export default function BookDetail ({image, title, author, year, page_count, gen
     return (
         <div className="flex flex-col 
         items-center text-center mx-auto md:max-w-[1000px]
-        gap-2 pt-2 p-5 gap-2 px-10 
+        gap-2 pt-2 p-5 px-10 
         md:flex-row md:text-left md:p-10 md:items-start">
             <div className="md:max-w-[60%]">
                 <img className="md:w-1000"
