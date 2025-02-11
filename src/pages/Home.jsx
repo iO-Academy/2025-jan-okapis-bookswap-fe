@@ -18,7 +18,7 @@ export default function Home() {
     useEffect(getData, [])
 
     return(
-      <section>    
+      <section className="grid grid-cols-1 md:grid-cols-3 max-w[800px]">    
         {bookInfo.map(function (book) {
             return <SingleBook
                 key={book.id}
