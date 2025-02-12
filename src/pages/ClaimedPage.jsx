@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import SingleBook from "../components/SingleBook";
 import { Link } from "react-router-dom";
 
-export default function Home() {
+export default function Claimed() {
     const [bookInfo, setBookInfo] = useState([])
 
     function getData() {
-        let url = "https://book-swap-api.dev.io-academy.uk/api/books?claimed=0"
+        let url = "https://book-swap-api.dev.io-academy.uk/api/books?claimed=1"
 
         fetch(url)
          .then(res => res.json())
