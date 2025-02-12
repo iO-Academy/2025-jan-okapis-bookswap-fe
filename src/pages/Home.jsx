@@ -1,18 +1,13 @@
 import { useEffect, useState } from "react";
 import SingleBook from "../components/SingleBook";
 import { Link } from "react-router-dom";
+import GenreFilter from "../components/GenreFilter";
 
 export default function Home({claimed}) {
     const [bookInfo, setBookInfo] = useState([])
 
     function getData() {
         const url = `https://book-swap-api.dev.io-academy.uk/api/books?claimed=${claimed}`
-        // if ({claimed}=1){
-        //    url = "https://book-swap-api.dev.io-academy.uk/api/books?claimed=1"
-        // }
-        // else {
-        //     url = "https://book-swap-api.dev.io-academy.uk/api/books?claimed=0"
-        // }
 
         fetch(url)
          .then(res => res.json())
@@ -24,6 +19,17 @@ export default function Home({claimed}) {
     useEffect(getData, [claimed])
 
     return(
+      <>
+        <>
+          <label for="genre">Filter by genre:</label>     
+            <select name="genre" id="genre">
+               <option value="thriller">Thriller</option>
+               <option value="romance">Romance</option>
+               <option value="historical">Historical</option>
+               <option value="non-fiction">Non-fiction</option>
+            </select>
+        </>
+  
       <section className="grid grid-cols-1 md:grid-cols-3 max-w[800px]">    
         {bookInfo.map(function (book) {
             return (
@@ -35,7 +41,8 @@ export default function Home({claimed}) {
                 genre={book.genre.name}    
               />  
             </Link> )
+          
         })}
-      </section> 
+      </section> </>
     )
 }
