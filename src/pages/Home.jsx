@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import SingleBook from "../components/SingleBook";
+import { Link } from "react-router-dom";
 
 export default function Home() {
     const [bookInfo, setBookInfo] = useState([])
@@ -19,13 +20,15 @@ export default function Home() {
     return(
       <section className="grid grid-cols-1 md:grid-cols-3 max-w[800px]">    
         {bookInfo.map(function (book) {
-            return <SingleBook
-                key={book.id}
+            return (
+            <Link key={book.id} to={`/book/${book.id}`} >
+              <SingleBook
                 title={book.title}
                 author={book.author}
                 image={book.image}
-                genre={book.genre.name}
-             />   
+                genre={book.genre.name}    
+              />  
+            </Link> )
         })}
       </section> 
     )

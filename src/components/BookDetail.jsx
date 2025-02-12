@@ -16,7 +16,7 @@ export default function BookDetail ({image, title, author, year, page_count, gen
                 <H2 text={title} />
                 <Highlighted text={author} />
                 <Highlighted text={year} />
-                <Highlighted text={page_count} />
+                <Highlighted text={`${page_count} pages`}/>
                 <Highlighted text={genre} />
                 <div className="pt-5">
                     <P text ={blurb} />
