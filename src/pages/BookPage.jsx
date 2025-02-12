@@ -24,8 +24,8 @@ export default function BookPage() {
     useEffect(getBookDetails, [])
 
     const data = {
-        "name":'',
-        "email":'test @email. com',
+        "name":'Ben',
+        "email":'test@email.com',
     };
 
     const requestOptions = {
