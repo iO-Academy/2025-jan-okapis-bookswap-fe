@@ -8,7 +8,7 @@ export default function BookPage() {
     const [bookDetails, setBookDetails] = useState("")
     const [bookGenre, setBookGenre] = useState("")
 
-    function getBookDetails(){
+    function getBookDetails() {
         fetch(`https://book-swap-api.dev.io-academy.uk/api/books/${id}`)
             .then(response => response.json())
             .then(details => {
