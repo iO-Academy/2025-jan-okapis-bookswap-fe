@@ -8,9 +8,13 @@ export default function App() {
     <BrowserRouter>
       <Nav />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home claimed="0"/>} />
+        <Route path="/claimed" element={<Home claimed="1" />} />
         <Route path="/book/:id" element={<BookPage />} />
       </Routes>
     </BrowserRouter>
   ) 
 }
+// Make Claimed and Home into one component, add props that change URL 
+// end bit (query string) into component names above to define which version of component shows.
+// Rename component something like "BookDisplayPage"
