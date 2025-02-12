@@ -10,11 +10,11 @@ export default function Nav() {
 
       <div className="flex items-center pt-2 gap-6 md:justify-start">
         <div>
-          <NavLink to="/" className={({ isActive }) => isActive ? "active" : "bg-pink-900"}>
+          <NavLink to="/" className={({ isActive }) => isActive && "font-bold"}>
           <H2 text="Available books" /></NavLink>
         </div>
         <div>
-          <NavLink to="/claimed" className={({ isActive }) => isActive ? "active" : ""}> 
+          <NavLink to="/claimed" className={({ isActive }) => isActive && "font-bold"}> 
           <H2 text="Claimed books" /></NavLink>
         </div>
       </div>
