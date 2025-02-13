@@ -11,24 +11,24 @@ export default function ClaimForm ({person, getBookDetails}) {
     const [nameError, setNameError] = useState("")
     const [emailError, setEmailError] = useState("")
     const [name, setName] = useState("")
-    const [email, setEmail] = useState("")
-
-
-    const data = {
-        "name":name,
-        "email":email,
-    };
-
-    const requestOptions = {
-        method: "PUT",
-        mode: 'cors',
-        headers: { "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-        body: JSON.stringify(data)
-    }
+    const [email, setEmail] = useState("")   
 
     function sendClaimForm() {
+
+        const data = {
+            "name":name,
+            "email":email,
+        };
+    
+        const requestOptions = {
+            method: "PUT",
+            mode: 'cors',
+            headers: { "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+            body: JSON.stringify(data)
+        }
+
         fetch(`https://book-swap-api.dev.io-academy.uk/api/books/claim/${id}`, requestOptions)
         .then(response => response.json())
         .then(claimData => {
