@@ -2,12 +2,14 @@ import { useParams } from "react-router-dom";
 import BookDetail from "../components/BookDetail";
 import { useEffect, useState } from "react";
 import BookReview from "../components/BookReview";
+import H5 from "../components/atoms/H5";
 
 export default function BookPage() {
     
     const {id} = useParams()
     const [bookDetails, setBookDetails] = useState("")
     const [bookGenre, setBookGenre] = useState("")
+    const [bookReviews, setBookReviews] = useState([])
 
     function getBookDetails() {
         fetch(`https://book-swap-api.dev.io-academy.uk/api/books/${id}`)
@@ -15,6 +17,7 @@ export default function BookPage() {
             .then(details => {
                 setBookDetails(details.data)
                 setBookGenre(details.data.genre.name)
+                setBookReviews(details.data.reviews)
             })
     }   
 
@@ -32,11 +35,23 @@ export default function BookPage() {
                page_count={bookDetails.page_count}
                genre={bookGenre}
                blurb={bookDetails.blurb} />
-            <BookReview
-               key={bookDetails.reviews.id}
-               name={bookDetails.reviews.name}
-               rating={bookDetails.reviews.rating}
-               review={bookDetails.reviews.review} />
+
+            
+            <div className="
+                pt-2 pb-5 px-10 text-center mx-auto 
+                md:max-w-[1000px] md:text-left md:px-10 md:py-2 md:items-start ">
+                    <H5 text="Reviews"/>
+
+                    {bookReviews.map(function (reviews) {
+                        return (
+                    <BookReview
+                    key={reviews.id}
+                    name={reviews.name}
+                    rating={reviews.rating}
+                    review={reviews.review} />
+                
+                )})}
+            </div>
         </div>
     )
 }
