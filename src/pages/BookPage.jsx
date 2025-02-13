@@ -11,6 +11,8 @@ export default function BookPage() {
     const [bookGenre, setBookGenre] = useState("")
     const [bookReviews, setBookReviews] = useState([])
     const [reviewNumber, setReviewNumber] = useState(0)
+    const [ratingAverage, setRatingAverage] = useState(0)
+    const [ratingTotal, setRatingTotal] = useState([])
 
     function getBookDetails() {
         fetch(`https://book-swap-api.dev.io-academy.uk/api/books/${id}`)
@@ -20,8 +22,17 @@ export default function BookPage() {
                 setBookGenre(details.data.genre.name)
                 setBookReviews(details.data.reviews)
                 setReviewNumber(details.data.reviews.length) 
-            })
-    }   
+
+
+                setRatingTotal({ratingTotal.map(function (review)
+                    return
+                    (
+                        ratingTotal = ratingTotal + details.data.reviews.rating
+                    ))})
+               
+                })}
+                    // ratingAverage = ratingTotal/reviewNumber  
+  //get value of "rating" from each object in the array, divide this by reviewNumber
 
     useEffect(getBookDetails, [])
     
