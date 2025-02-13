@@ -8,11 +8,11 @@ export default function GenreFilter ( {genres, onFilterChange}) {
             <select
             id="genre"
             aria-label="Select genre" 
-            className="border p-0.5 rounded w-40 md:w-50 lg:w-55 text-base"
+            className="border p-0.5 rounded w-45 md:w-50 lg:w-55 text-base"
             onChange={(e) => onFilterChange(e.target.value)} 
             defaultValue="">
 
-            <option value="" disabled>Choose a genre</option>
+            <option value=""> No genre selected </option>
             {genres.map(genre => (
                 <option key={genre} value={genre}>
                     {genre}
