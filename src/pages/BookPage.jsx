@@ -25,7 +25,7 @@ export default function BookPage() {
 
                 const ratings = details.data.reviews.map(review => review.rating)
                 const total = ratings.reduce((acc, rating) => acc + rating, 0) 
-                const averageRating = total / ratings.length;
+                const averageRating = (total / ratings.length).toFixed(1);
 
                 setAverageRating(averageRating);
             })
