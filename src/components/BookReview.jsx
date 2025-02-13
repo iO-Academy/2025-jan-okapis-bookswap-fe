@@ -1,5 +1,3 @@
-
-import H5 from "./atoms/H5"
 import P from "./atoms/P"
 
 export default function BookReview ({name, rating, review}) {

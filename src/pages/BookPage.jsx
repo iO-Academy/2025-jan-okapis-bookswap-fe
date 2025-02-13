@@ -10,6 +10,7 @@ export default function BookPage() {
     const [bookDetails, setBookDetails] = useState("")
     const [bookGenre, setBookGenre] = useState("")
     const [bookReviews, setBookReviews] = useState([])
+    const [reviewNumber, setReviewNumber] = ([])
 
     function getBookDetails() {
         fetch(`https://book-swap-api.dev.io-academy.uk/api/books/${id}`)
@@ -20,6 +21,17 @@ export default function BookPage() {
                 setBookReviews(details.data.reviews)
             })
     }   
+
+  
+    
+    function setReviewNumber() {
+        let reviewNumber=0
+        res.data.forEach(data => {
+        reviewNumber++
+    } )
+    return console.log(reviewNumber)
+}
+
 
     useEffect(getBookDetails, [])
     
@@ -35,7 +47,6 @@ export default function BookPage() {
                page_count={bookDetails.page_count}
                genre={bookGenre}
                blurb={bookDetails.blurb} />
-
             
             <div className="
                 pt-2 pb-5 px-10 text-center mx-auto 
