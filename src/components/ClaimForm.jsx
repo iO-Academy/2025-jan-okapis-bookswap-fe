@@ -1,16 +1,18 @@
 import { useParams } from "react-router-dom";
 import H3 from "./atoms/H3";
 import P from "./atoms/P";
-import { useEffect, useState } from "react";
+import Highlighted from "./atoms/Highlighted";
+import { useState } from "react";
 
 
-export default function ClaimForm () {
+export default function ClaimForm ({person, getBookDetails}) {
 
     const {id} = useParams()
     const [nameError, setNameError] = useState("")
     const [emailError, setEmailError] = useState("")
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
+
 
     const data = {
         "name":name,
@@ -32,13 +34,14 @@ export default function ClaimForm () {
         .then(claimData => {
             setEmailError(claimData?.errors?.email)
             setNameError(claimData?.errors?.name)
-        })
+            getBookDetails()
+        })    
     }
 
-    function handleClick(e) {
+    function handleSubmit(e) {
         e.preventDefault();
         sendClaimForm()
-    }
+    } 
 
     function handleNameChange(e) {
         setName(e.target.value)
@@ -49,15 +52,18 @@ export default function ClaimForm () {
     }
 
     return (
-        <form onSubmit={handleClick} className="border-1 p-3 flex flex-col text-left max-w-full">
-            <H3 text={"Want to claim this book?"}/>
-            <label htmlFor="name">Name</label>
-            <input onChange={handleNameChange} value={name} type="text" id="name" className="border-1"/>
-            {nameError && <P text={nameError}/>}
-            <label htmlFor="email">Email</label>
-            <input onChange={handleEmailChange} value={email} type="email" id="email" className="border-1 mb-2"/>
-            {emailError && <P text={emailError}/>}
-            <input type="submit" value="Claim" className="border-1"/>
-        </form>       
+        <div>
+            {person ? <Highlighted text={`Claimed by ${person}`}/> :  
+            <form onSubmit={handleSubmit} className="border-1 p-3 flex flex-col text-left max-w-full">
+                <H3 text={"Want to claim this book?"}/>
+                <label htmlFor="name">Name</label>
+                <input onChange={handleNameChange} value={name} type="text" id="name" className="border-1"/>
+                {nameError && <P text={nameError}/>}
+                <label htmlFor="email">Email</label>
+                <input onChange={handleEmailChange} value={email} type="email" id="email" className="border-1 mb-2"/>
+                {emailError && <P text={emailError}/>}
+                <input type="submit" value="Claim" className="border-1"/>
+            </form>}
+        </div>       
     )
 }

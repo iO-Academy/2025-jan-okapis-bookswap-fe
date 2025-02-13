@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import H2 from "./atoms/H2";
 import Highlighted from "./atoms/Highlighted";
 import P from "./atoms/P";
-import StatusCheck from "./StatusCheck";
 import { useParams } from "react-router-dom";
+import ClaimForm from "./ClaimForm";
 
-export default function BookDetail ({person, claimedStatus}) {
+export default function BookDetail () {
 
     const {id} = useParams()
     const [bookDetails, setBookDetails] = useState("")
@@ -13,21 +13,18 @@ export default function BookDetail ({person, claimedStatus}) {
     const [claimedName, setClaimedName] = useState(null)
 
     function getBookDetails() {
+        console.log('getBookDetails')
         fetch(`https://book-swap-api.dev.io-academy.uk/api/books/${id}`)
             .then(response => response.json())
             .then(details => {
+                console.log('Data fetched')
                 setBookDetails(details.data)
                 setBookGenre(details.data.genre.name)
                 setClaimedName(details.data.claimed_by_name)
             })
-    }
+    }  
 
     useEffect(getBookDetails, [])
-
-    var claimedStatus = true
-    if (claimedName === null){
-        claimedStatus = false
-    }
 
     return (
         <div className="flex flex-col 
@@ -44,7 +41,7 @@ export default function BookDetail ({person, claimedStatus}) {
                 <Highlighted text={bookDetails.year} />
                 <Highlighted text={`${bookDetails.page_count} pages`}/>
                 <Highlighted text={bookGenre} />
-                <StatusCheck person={claimedName} claimed={claimedStatus}/>
+                <ClaimForm person={claimedName} getBookDetails={getBookDetails} />               
                 <div className="pt-5">
                     <P text ={bookDetails.blurb} />
                 </div>
