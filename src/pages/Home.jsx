@@ -5,7 +5,7 @@ import GenreFilter from "../components/GenreFilter";
 
 export default function Home({claimed}) {
     const [bookInfo, setBookInfo] = useState([])
-    const [filteredBooks, setFilterBooks] = useState([])
+    const [filteredBooks, setFilteredBooks] = useState([])
     const [genres, setGenres] = useState([])
     const [selectedGenre, setSelectedGenre] = useState("")
 
@@ -16,10 +16,12 @@ export default function Home({claimed}) {
          .then(res => res.json())
          .then(fetchedInfo => {
             setBookInfo(fetchedInfo.data);
+            setFilteredBooks(fetchedInfo.data) //added line//
 
-            const bookGenres = [new Set(fetchedInfo.data.map(book => book.genre.name))]
-            setGenres(bookGenres)
+            const uniqueGenres = Array.from (new Set(fetchedInfo.data.map(book => book.genre.name)));
+            setGenres(uniqueGenres) //needed to be 'unique'//
          })
+         .catch(error => console.error("Error fetching books", error)) //added in case there is an error fetching//
     }
 
     useEffect(getData, [claimed])
@@ -27,9 +29,9 @@ export default function Home({claimed}) {
     function handleFilterChange(genre) {
       setSelectedGenre(genre)
       if (genre === "") {
-        setFilterBooks(bookInfo)
+        setFilteredBooks(bookInfo)
       } else {
-        setFilterBooks(bookInfo.filter(book => book.genre.name === genre))
+        setFilteredBooks(bookInfo.filter(book => book.genre.name === genre))
       }
       }
 
