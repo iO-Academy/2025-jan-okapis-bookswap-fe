@@ -6,11 +6,10 @@ import GenreFilter from "../components/GenreFilter";
 export default function Home({claimed}) {
     const [bookInfo, setBookInfo] = useState([])
     const [genres, setGenres] = useState([])
-    const [filteredBooks, setFilteredBooks] = useState([])
     const [selectedGenre, setSelectedGenre] = useState("")
 
     function getData() {
-        const url = `https://book-swap-api.dev.io-academy.uk/api/books?claimed=${claimed}`
+        const url = `https://book-swap-api.dev.io-academy.uk/api/books?claimed=${claimed}${selectedGenre ? `&genre=${selectedGenre}` : ''}`;
 
         fetch(url)
          .then(res => res.json())
@@ -20,22 +19,25 @@ export default function Home({claimed}) {
          .catch(error => console.error("Error fetching books", error))
     }
 
-    useEffect(getData, [claimed])
+    useEffect(getData, [claimed, selectedGenre])
 
     useEffect(() => {
       fetch('https://book-swap-api.dev.io-academy.uk/api/genres')
       .then(res => res.json())
       .then(genres => {
         setGenres(genres.data);
-        console.log(genres.data)
       })
     }, [])
+
+    function handleGenreChange(genreId) {
+      setSelectedGenre(genreId)
+    }
 
   
     return(
         <div>
           <div>
-            <GenreFilter genres={genres}/>
+            <GenreFilter genres={genres} getGenreId={handleGenreChange} />
           </div>
   
           <section className="grid grid-cols-1 md:grid-cols-3 max-w[800px]">    
