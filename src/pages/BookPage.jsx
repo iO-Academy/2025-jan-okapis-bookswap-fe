@@ -11,6 +11,8 @@ export default function BookPage() {
     const [bookGenre, setBookGenre] = useState("")
     const [bookReviews, setBookReviews] = useState([])
     const [reviewNumber, setReviewNumber] = useState(0)
+    const [averageRating, setAverageRating] = useState([])
+    const [bookRatings, setBookRatings] = useState([])
 
     function getBookDetails() {
         fetch(`https://book-swap-api.dev.io-academy.uk/api/books/${id}`)
@@ -20,6 +22,12 @@ export default function BookPage() {
                 setBookGenre(details.data.genre.name)
                 setBookReviews(details.data.reviews)
                 setReviewNumber(details.data.reviews.length) 
+
+                const ratings = details.data.reviews.map(review => review.rating)
+                const total = ratings.reduce((acc, rating) => acc + rating, 0) 
+                const averageRating = total / ratings.length;
+
+                setAverageRating(averageRating);
             })
     }   
 
@@ -37,6 +45,7 @@ export default function BookPage() {
                page_count={bookDetails.page_count}
                genre={bookGenre}
                review_number={reviewNumber}
+               rating={averageRating}
                blurb={bookDetails.blurb} />
             
             <div className="
