@@ -1,22 +1,115 @@
+import { useState } from "react"
+import Highlighted from "../components/atoms/Highlighted"
+
 export default function AddBook() {
+
+    const [title, setTitle] = useState("")
+    const [author, setAuthor] = useState("")
+    const [year, setYear] = useState("")
+    const [pageCount, setPageCount] = useState("")
+    const [imageURL, setImageURL] = useState("")
+    const [blurb, setBlurb] = useState("")
+
+    const [titleError, setTitleError] = useState("")
+    const [authorError, setAuthorError] = useState("")    
+    const [genreError, setGenreError] = useState("")   
+    const [yearError, setYearError] = useState("")
+    const [pageCountError, setPageCountError] = useState("")
+    const [imageURLError, setImageURLError] = useState("")  
+
+    const [successMessage, setSuccessMessage] = useState("")
+
+    function addBook() {
+
+        const data = {
+            "title":title,
+            "author":author,
+            "genre_id":1,
+            "year":year, 
+            "page_count":pageCount,       
+            "image":imageURL,
+            "blurb":blurb         
+        }       
+
+        const requestOptions = {
+            method: "POST",
+            mode: 'cors',
+            headers: {"Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body:JSON.stringify(data)
+        }
+
+        fetch('https://book-swap-api.dev.io-academy.uk/api/books', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                if (data.errors) {    
+                    setTitleError(data.errors.title)                           
+                    setAuthorError(data.errors.author)                                 
+                    setGenreError(data.errors.genre_id)
+                    setImageURLError(data.errors.image)
+                    setPageCountError(data.errors.page_count)
+                    setYearError(data.errors.year)
+                } else {
+                    setSuccessMessage(data.message)
+                }           
+                    
+            })
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        addBook()       
+    }
+
+    function handleTitleChange(e) {
+        setTitle(e.target.value)
+    }
+
+    function handleAuthorChange(e) {
+        setAuthor(e.target.value)
+    }
+
+    function handleYearChange(e) {
+        setYear(e.target.value)
+    }
+
+    function handlePageCountChange(e) {
+        setPageCount(e.target.value)
+    }
+
+    function handleImageURLChange(e) {
+        setImageURL(e.target.value)
+    }
+
+    function handleBlurbChange(e) {
+        setBlurb(e.target.value)
+    }
+
     return (
         <div className="flex justify-center">
-            <form className="flex flex-col
-            p-4 w-xl">
+            <form onSubmit={handleSubmit} 
+            className="flex flex-col p-4 w-xl">            
                 <label className="mt-2 mb-1" htmlFor="title">Title (required)</label>
-                <input className="px-1 border-[1px]" type="text" placeholder="Title" name="title" id="title" />
+                <Highlighted text={titleError} />
+                <input onChange={handleTitleChange} className="px-1 border-[1px]" type="text" placeholder="Title" name="title" id="title" />
                 <label className="mt-2 mb-1" htmlFor="author">Author (required)</label>
-                <input className="px-1 border-[1px]" type="text" placeholder="Author" name="author" id="author" />
-                <label className="mt-2 mb-1" htmlFor="year">Year</label> 
-                <input className="px-1 border-[1px]" type="number" placeholder="2000" name="year" id="year" />
+                <Highlighted text={authorError} />
+                <input onChange={handleAuthorChange} className="px-1 border-[1px]" type="text" placeholder="Author" name="author" id="author" />
+                <label className="mt-2 mb-1" htmlFor="year">Year</label>
+                <Highlighted text={yearError} /> 
+                <input onChange={handleYearChange} className="px-1 border-[1px]" type="number" placeholder="2000" name="year" id="year" />
                 <label className="mt-2 mb-1" htmlFor="pageCount">Page count</label>
-                <input className="px-1 border-[1px]" type="number" placeholder="0" name="pageCount" id="pageCount" />
+                <Highlighted text={pageCountError} />
+                <input onChange={handlePageCountChange} className="px-1 border-[1px]" type="number" placeholder="0" name="pageCount" id="pageCount" />
                 <label className="mt-2 mb-1" htmlFor="imageURL">Image URL</label>
-                <input className="px-1 border-[1px]" type="url" placeholder="Image URL" name="imageURL" id="imageURL" />
+                <Highlighted text={imageURLError} />
+                <input onChange={handleImageURLChange} className="px-1 border-[1px]" type="url" placeholder="Image URL" name="imageURL" id="imageURL" />
                 <label className="mt-2 mb-1" htmlFor="blurb">Blurb</label>
-                <textarea className="px-1 border-[1px] h-[150px]" placeholder="Blurb" name="blurb" id="blurb"></textarea>
+                <textarea onChange={handleBlurbChange} className="px-1 border-[1px] h-[150px]" placeholder="Blurb" name="blurb" id="blurb"></textarea>
                 <label className="mt-2 mb-1" htmlFor="addBook"></label>
                 <input className="px-1 border-[1px]" type="submit" value="Add book" name="addBook" id="addBook" />
+                <Highlighted text={successMessage} />
             </form>
         </div>
     )
