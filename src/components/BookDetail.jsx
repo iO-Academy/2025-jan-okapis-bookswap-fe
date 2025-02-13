@@ -1,8 +1,9 @@
 import H2 from "./atoms/H2";
 import Highlighted from "./atoms/Highlighted";
 import P from "./atoms/P";
+import Rating from "./Rating";
 
-export default function BookDetail ({image, title, author, year, page_count, genre, blurb}) {
+export default function BookDetail ({image, title, author, year, page_count, genre, review_number, blurb}) {
     return (
         <div className="flex flex-col 
         items-center text-center mx-auto md:max-w-[1000px]
@@ -18,6 +19,7 @@ export default function BookDetail ({image, title, author, year, page_count, gen
                 <Highlighted text={year} />
                 <Highlighted text={`${page_count} pages`}/>
                 <Highlighted text={genre} />
+                <Rating reviewNumber={review_number} />
                 <div className="pt-5">
                     <P text ={blurb} />
                 </div>
