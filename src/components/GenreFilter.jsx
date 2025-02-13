@@ -6,9 +6,9 @@ export default function GenreFilter ( {genres, onFilterChange}) {
             <select id="genre" aria-label="Select genre" className="border p-0.5 rounded w-45 md:w-50 lg:w-55 text-base" defaultValue="">
 
             {genres.map(genre => 
-                <option key={genre.key} value="">{genre.name}</option>
+                <option key={genre.id} value={genre.name}>{genre.name}</option>
             )}
-            
+
             </select>
         </div>
         )
