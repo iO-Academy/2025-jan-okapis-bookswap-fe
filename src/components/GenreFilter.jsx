@@ -1,7 +1,6 @@
 export default function GenreFilter () {
     handle
 
-
     return (
         <>
           <label for="genre">Filter by genre:</label>     
