@@ -16,12 +16,12 @@ export default function Home({claimed}) {
          .then(res => res.json())
          .then(fetchedInfo => {
             setBookInfo(fetchedInfo.data);
-            setFilteredBooks(fetchedInfo.data) //added line//
+            setFilteredBooks(fetchedInfo.data) 
 
             const uniqueGenres = Array.from (new Set(fetchedInfo.data.map(book => book.genre.name)));
-            setGenres(uniqueGenres) //needed to be 'unique'//
+            setGenres(uniqueGenres)
          })
-         .catch(error => console.error("Error fetching books", error)) //added in case there is an error fetching//
+         .catch(error => console.error("Error fetching books", error))
     }
 
     useEffect(getData, [claimed])
