@@ -35,7 +35,7 @@ export default function BookPage() {
     return(
         <div>
             <div>
-                <BookDetail rating={averageRating} review_number={total} />
+                <BookDetail rating={averageRating} review_number={reviewNumber} />
             </div>
             
             <div className="
