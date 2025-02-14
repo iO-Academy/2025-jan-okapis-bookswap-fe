@@ -13,13 +13,15 @@ export default function BookDetail ({image, title, author, year, page_count, gen
                 <img className="md:w-1000"
                 src={image} alt={title} />
             </div>
-            <div className="flex flex-col gap-[10px]">
+            <div className="flex flex-col gap-[10px] w-100% max-w-50 mx-auto">
                 <H2 text={title} />
                 <Highlighted text={author} />
                 <Highlighted text={year} />
-                <Highlighted text={`${page_count} pages`}/>
-                <Highlighted text={genre} />
+                <P text={`${page_count} pages`}/>
+                <P text={genre} />
+                <div >
                 <Rating rating={rating} reviewNumber={review_number} />
+                </div>
                 <div className="pt-5">
                     <P text ={blurb} />
                 </div>

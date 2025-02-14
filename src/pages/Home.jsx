@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import SingleBook from "../components/SingleBook";
 import { Link } from "react-router-dom";
-import GenreFilter from "../components/GenreFilter";
 
 export default function Home({claimed}) {
     const [bookInfo, setBookInfo] = useState([])
@@ -20,16 +19,6 @@ export default function Home({claimed}) {
 
     return(
       <>
-        <>
-          <label for="genre">Filter by genre:</label>     
-            <select name="genre" id="genre">
-               <option value="thriller">Thriller</option>
-               <option value="romance">Romance</option>
-               <option value="historical">Historical</option>
-               <option value="non-fiction">Non-fiction</option>
-            </select>
-        </>
-  
       <section className="grid grid-cols-1 md:grid-cols-3 max-w[800px]">    
         {bookInfo.map(function (book) {
             return (
@@ -41,7 +30,6 @@ export default function Home({claimed}) {
                 genre={book.genre.name}    
               />  
             </Link> )
-          
         })}
       </section> </>
     )

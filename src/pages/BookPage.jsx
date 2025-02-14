@@ -12,7 +12,6 @@ export default function BookPage() {
     const [bookReviews, setBookReviews] = useState([])
     const [reviewNumber, setReviewNumber] = useState(0)
     const [averageRating, setAverageRating] = useState([])
-    const [bookRatings, setBookRatings] = useState([])
 
     function getBookDetails() {
         fetch(`https://book-swap-api.dev.io-academy.uk/api/books/${id}`)
@@ -49,10 +48,9 @@ export default function BookPage() {
                blurb={bookDetails.blurb} />
             
             <div className="
-                pt-2 pb-5 px-10 text-center mx-auto 
+                pt-2 pb-5 px-20 text-center mx-auto 
                 md:max-w-[1000px] md:text-left md:px-10 md:py-2 md:items-start ">
                     <H5 text="Reviews"/>
-
                     {bookReviews.map(function (reviews) {
                         return (
                     <BookReview
