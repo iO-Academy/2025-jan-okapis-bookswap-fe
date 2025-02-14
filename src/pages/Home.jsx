@@ -38,7 +38,7 @@ export default function Home({claimed}) {
     return (
       <div>
         <div>
-          <GenreFilter genres={genres} getGenreId={handleGenreChange} />
+          <GenreFilter genres={genres} handleGenreId={handleGenreChange} />
         </div>
 
         <section className="grid grid-cols-1 md:grid-cols-3 max-w[800px]">    
