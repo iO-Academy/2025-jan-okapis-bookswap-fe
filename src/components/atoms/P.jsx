@@ -1,5 +1,5 @@
-export default function P({text}) {
+export default function P({text, className}) {
     return(
-        <p>{text}</p>
+        <p className={className}>{text}</p>
     )
 }

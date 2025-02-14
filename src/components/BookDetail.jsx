@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import H2 from "./atoms/H2";
 import Highlighted from "./atoms/Highlighted";
 import P from "./atoms/P";
+import Rating from "./Rating";
 import { useParams } from "react-router-dom";
 import ClaimForm from "./ClaimForm";
 
-export default function BookDetail () {
+export default function BookDetail ({review_number, rating}) {
 
     const {id} = useParams()
     const [bookDetails, setBookDetails] = useState("")
@@ -35,12 +36,16 @@ export default function BookDetail () {
                 <img className="md:w-1000"
                 src={bookDetails.image} alt={bookDetails.title} />
             </div>
+
             <div className="flex flex-col gap-[10px]">
                 <H2 text={bookDetails.title} />
                 <Highlighted text={bookDetails.author} />
                 <Highlighted text={bookDetails.year} />
                 <Highlighted text={`${bookDetails.page_count} pages`}/>
                 <Highlighted text={bookGenre} />
+                <div >
+                    <Rating rating={rating} reviewNumber={review_number} />
+                </div>
                 <ClaimForm person={claimedName} getBookDetails={getBookDetails} />               
                 <div className="pt-5">
                     <P text ={bookDetails.blurb} />
