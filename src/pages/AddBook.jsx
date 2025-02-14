@@ -1,6 +1,5 @@
 import { useState } from "react"
 import Highlighted from "../components/atoms/Highlighted"
-import GenreFilter from "../components/GenreFilter"
 
 export default function AddBook() {
 
