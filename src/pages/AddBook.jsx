@@ -1,11 +1,13 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Highlighted from "../components/atoms/Highlighted"
 
 export default function AddBook() {
 
     const [title, setTitle] = useState("")
     const [author, setAuthor] = useState("")
-    const [genre, setGenre] = useState("")
+    const [genreID, setGenreId] = useState("")
+    const [genreName, setGenreName] = useState("")
+    const [genreOptions, setGenreOptions] = useState([])
     const [year, setYear] = useState("")
     const [pageCount, setPageCount] = useState("")
     const [imageURL, setImageURL] = useState("")
@@ -58,6 +60,17 @@ export default function AddBook() {
             })
     }
 
+    function getGenre() {
+        fetch('https://book-swap-api.dev.io-academy.uk/api/books')
+            .then(response => response.json())
+            .then(genres => {
+                setGenreOptions(genres.data)
+                setGenreId(genres.data.genre.id)
+                setGenreName(genres.data.genre.name)         
+    })
+
+    useEffect(getGenre, [])
+
     function handleSubmit(e) {
         e.preventDefault()
         addBook()       
@@ -104,11 +117,10 @@ export default function AddBook() {
                 <label className="mt-2 mb-1" htmlFor="genre">Genre (required)</label>
                 <Highlighted text={genreError} />
                 <select id="genre" aria-label="Select genre" className="px-1 border-[1px]" onChange={handleGenreChange}>
-                    <option value="">None Selected</option>
-                    <option value="1">Thriller</option>
-                    <option value="2">Romance</option>
-                    <option value="3">Historical</option>
-                    <option value="4">Non-fiction</option>
+                    <option value="">No genre selected</option>
+                        {genreOptions.map(genre => 
+                            <option key={genreID} value={genreID}>{genreName}</option>
+                        )}
                 </select>
                 <label className="mt-2 mb-1" htmlFor="year">Year</label>
                 <Highlighted text={yearError} /> 
