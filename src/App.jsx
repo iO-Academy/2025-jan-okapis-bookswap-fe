@@ -17,6 +17,3 @@ export default function App() {
     </BrowserRouter>
   ) 
 }
-// Make Claimed and Home into one component, add props that change URL 
-// end bit (query string) into component names above to define which version of component shows.
-// Rename component something like "BookDisplayPage"
