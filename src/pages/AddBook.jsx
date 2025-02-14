@@ -1,10 +1,12 @@
 import { useState } from "react"
 import Highlighted from "../components/atoms/Highlighted"
+import GenreFilter from "../components/GenreFilter"
 
 export default function AddBook() {
 
     const [title, setTitle] = useState("")
     const [author, setAuthor] = useState("")
+    const [genre, setGenre] = useState("")
     const [year, setYear] = useState("")
     const [pageCount, setPageCount] = useState("")
     const [imageURL, setImageURL] = useState("")
@@ -24,7 +26,7 @@ export default function AddBook() {
         const data = {
             "title":title,
             "author":author,
-            "genre_id":1,
+            "genre_id":genre,
             "year":year, 
             "page_count":pageCount,       
             "image":imageURL,
@@ -70,6 +72,10 @@ export default function AddBook() {
         setAuthor(e.target.value)
     }
 
+    function handleGenreChange(e) {
+        setGenre(e.target.value)
+    }
+
     function handleYearChange(e) {
         setYear(e.target.value)
     }
@@ -96,6 +102,15 @@ export default function AddBook() {
                 <label className="mt-2 mb-1" htmlFor="author">Author (required)</label>
                 <Highlighted text={authorError} />
                 <input onChange={handleAuthorChange} className="px-1 border-[1px]" type="text" placeholder="Author" name="author" id="author" />
+                <label className="mt-2 mb-1" htmlFor="genre">Genre (required)</label>
+                <Highlighted text={genreError} />
+                <select id="genre" aria-label="Select genre" className="px-1 border-[1px]" onChange={handleGenreChange}>
+                    <option value="">None Selected</option>
+                    <option value="1">Thriller</option>
+                    <option value="2">Romance</option>
+                    <option value="3">Historical</option>
+                    <option value="4">Non-fiction</option>
+                </select>
                 <label className="mt-2 mb-1" htmlFor="year">Year</label>
                 <Highlighted text={yearError} /> 
                 <input onChange={handleYearChange} className="px-1 border-[1px]" type="number" placeholder="2000" name="year" id="year" />
