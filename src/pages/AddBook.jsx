@@ -5,6 +5,7 @@ export default function AddBook() {
 
     const [title, setTitle] = useState("")
     const [author, setAuthor] = useState("")
+    const [genre, setGenre] = useState ("")
     const [genreData, setGenreData] = useState([])
     const [year, setYear] = useState("")
     const [pageCount, setPageCount] = useState("")
