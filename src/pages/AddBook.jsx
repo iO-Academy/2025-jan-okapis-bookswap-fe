@@ -5,9 +5,7 @@ export default function AddBook() {
 
     const [title, setTitle] = useState("")
     const [author, setAuthor] = useState("")
-    const [genreID, setGenreId] = useState("")
-    const [genreName, setGenreName] = useState("")
-    const [genreOptions, setGenreOptions] = useState([])
+    const [genreData, setGenreData] = useState([])
     const [year, setYear] = useState("")
     const [pageCount, setPageCount] = useState("")
     const [imageURL, setImageURL] = useState("")
@@ -61,13 +59,11 @@ export default function AddBook() {
     }
 
     function getGenre() {
-        fetch('https://book-swap-api.dev.io-academy.uk/api/books')
+        fetch('https://book-swap-api.dev.io-academy.uk/api/genres')
             .then(response => response.json())
             .then(genres => {
-                setGenreOptions(genres.data)
-                setGenreId(genres.data.genre.id)
-                setGenreName(genres.data.genre.name)         
-    })
+                setGenreData(genres.data)       
+    })}
 
     useEffect(getGenre, [])
 
@@ -118,8 +114,8 @@ export default function AddBook() {
                 <Highlighted text={genreError} />
                 <select id="genre" aria-label="Select genre" className="px-1 border-[1px]" onChange={handleGenreChange}>
                     <option value="">No genre selected</option>
-                        {genreOptions.map(genre => 
-                            <option key={genreID} value={genreID}>{genreName}</option>
+                        {genreData.map(genre => 
+                            <option key={genre.id} value={genre.id}>{genre.name}</option>
                         )}
                 </select>
                 <label className="mt-2 mb-1" htmlFor="year">Year</label>
