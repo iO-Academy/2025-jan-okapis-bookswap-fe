@@ -34,18 +34,9 @@ export default function BookPage() {
     
     return(
         <div>
-            <BookDetail 
-               key={bookDetails.id}
-               image={bookDetails.image}
-               alt={bookDetails.title} 
-               title={bookDetails.title}
-               author={bookDetails.author}
-               year={bookDetails.year}
-               page_count={bookDetails.page_count}
-               genre={bookGenre}
-               review_number={reviewNumber}
-               rating={averageRating}
-               blurb={bookDetails.blurb} />
+            <div>
+                <BookDetail rating={averageRating} review_number={total} />
+            </div>
             
             <div className="
                 pt-2 pb-5 px-20 text-center mx-auto 
